@@ -50,7 +50,6 @@ hget_req:{[Sec;Method;Host;Path;Headers;QueryParams]
   methodstr: (method , (Path;"/")""~Path);
   if[0<count query;methodstr:methodstr,"?",query];
   methodstr:methodstr," ",header;
-  show methodstr;
   res:(`$":",protocol,"://",Host)methodstr;
   parse_return res
  };
@@ -66,7 +65,6 @@ hpost_req:{[Sec;Method;Host;Path;Headers;ContentType;Body]
   hd:hd, Headers;
   header: "\r\n" sv enlist["HTTP/1.1"],{if[10 <> abs type[y];y:string y]; string[x],": ",trim[y]}'[key hd;value hd];
   methodstr: (method , (Path;"/")""~Path)," ","\r\n" sv (header;"";Body);
-  show methodstr;
   res:(`$":",protocol,"://",Host)methodstr;
   parse_return res
  };
